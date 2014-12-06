@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Instatag</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href='http://fonts.googleapis.com/css?family=Damion' rel='stylesheet' type='text/css'>
+<style>
+
+/* Basic reset */
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	
+	/* Better text styling */
+	font: bold 14px Arial, sans-serif;
+}
+
+/* Finally adding some IE9 fallbacks for gradients to finish things up */
+
+/* A nice BG gradient */
+html {
+	height: 100%;
+	background: white;
+	background: radial-gradient(circle, #fff 30%, #ffeeaa);
+	background-size: cover;
+}
+
+body {
+	margin-top: 50px;
+	margin-bottom: 200px;
+}
+
+#header h1 {
+	height: auto;
+	text-align: center;
+	font-family: 'Damion', cursive;
+	font-size: 108px;
+	color: #FF9900;
+	text-shadow: 3px 3px 3px rgba(89, 89, 89, 0.6);
+}
+
+#top {
+	width: 325px;
+	height: auto;
+	
+	margin: 100px auto;
+	padding: 20px 20px 9px;
+	
+	background: #FFF700;
+	background: linear-gradient(#FFD700, #FF8900);
+	border-radius: 3px;
+	box-shadow: 0px 4px #FF5500, 0px 10px 15px rgba(0, 0, 0, 0.2);
+}
+
+#top input {
+	width: 100%;
+	height: 60px;
+	font-family: 'Damion', cursive;
+	font-size: 36px;
+	color: #898989;
+	text-align: center;
+}
+
+#top p {
+	margin-top: 20px;
+	text-align: center;
+}
+
+
+/*this is where jQuery appends the instagram json response*/
+#instagram {
+	float: left;
+	padding: 20px;
+}
+
+/*around each image*/
+.instagram-wrap {
+	float: left;
+	position: relative;
+	background: white;
+	padding: 5px;
+	margin: 15px;
+	box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+
+.instagram-wrap .likes {
+	height: 16px;
+	position: absolute;
+	left: 10px;
+	top: 10px;
+	color: black;
+	padding: 0 5px 0 22px;
+	margin: 10px;
+	line-height: 16px;
+	background: gray url('fav.png') no-repeat 2px 0;
+	opacity: 0.7;
+}
+
+.clearfix {
+	 clear:both;
+}
+
+#showMore{
+	margin: 20px 15px 28px;
+	text-align: center;
+}
+
+#more {
+  position: relative;
+  vertical-align: top;
+  width: 100%;
+  height: 60px;
+  padding: 10px 50px 10px 50px;
+  font-size: 22px;
+  color: white;	
+  font-family: 'Damion', cursive;
+  text-align: center;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+  background: #f39c12;
+  border: 0;
+  border-bottom: 2px solid #e8930c;
+  cursor: pointer;
+  -webkit-box-shadow: inset 0 -2px #e8930c;
+  box-shadow: inset 0 -2px #e8930c;
+}
+
+</style>
+</head>
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+    <script type="text/javascript">
+	function getInstagram(api_url){
+		var count = 20;
+		var hashtag = "hackatronasia";
+		if ( $('#id_hashtag').val() != '' ){
+			hashtag = $('#id_hashtag').val();
+		}
+		if ( api_url == '' ){
+			$("#instagram").html("");
+			api_url = "https://api.instagram.com/v1/tags/"+hashtag+"/media/recent/?client_id=e25c0165ca764a4ea0d0f9648b996c93";
+		}
+		
+		$.ajax({
+            type: "GET",
+            dataType: "jsonp",			
+            url: api_url,
+            success: function(data) {
+				next_url = data.pagination.next_url;	
+	            for (var i = 0; i < count; i++) {
+						if (typeof data.data[i] !== 'undefined' ) {
+							$("#instagram").append("<div class='instagram-wrap' id='pic-"+ data.data[i].id +"' ><a target='_blank' href='" + data.data[i].link +"'><span class='likes'>"+data.data[i].likes.count +" likes</span><img class='instagram-image' src='" + data.data[i].images.low_resolution.url +"' /></a></div>"
+							);  
+						}  
+	      		}			
+			$("#showMore").hide();
+			if (typeof next_url === 'undefined' || next_url.length < 10 ) {
+				$("#showMore").hide();
+				$("#more").attr( "next_url", "");
+			}
+			else {
+				$("#showMore").show();
+				$( "#more" ).attr( "next_url", next_url);
+				last_url = next_url;				
+			}			
+            }
+        });
+	}
+
+	$(document).ready(function() {
+		$("#more").click(function() {  
+			var next_url = $(this).attr('next_url');
+			getInstagram(next_url);
+			return false;
+		});
+
+		getInstagram("");
+	});
+
+
+</script>
+	
+	
+    </script>	
+
+</head>
+<body>
+<div id = "header">
+	<h1>Instatag</h1>
+</div>
+<div id = "top">
+	<input id="id_hashtag" value="hackatronasia" onChange="getInstagram('')"/>
+	<p>What's Popular: #9GAG, #OOTD</p>
+</div>
+
+<div id = "instagram">
+</div>
+
+<div id="showMore">
+	<div class='clearfix'><a id='more' next_url=''>Load More</a></div>		
+</div>
+
+	
+
+</body>
+</html>
