@@ -1,206 +1,457 @@
+
 <!DOCTYPE html>
-<html>
+<html class='home_index'>
 <head>
-<title>Instatag</title>
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<link href='http://fonts.googleapis.com/css?family=Damion' rel='stylesheet' type='text/css'>
+
 <style>
 
-/* Basic reset */
-* {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
-	
-	/* Better text styling */
-	font: bold 14px Arial, sans-serif;
+body, html {
+min-height: 100%;
 }
 
-/* Finally adding some IE9 fallbacks for gradients to finish things up */
-
-/* A nice BG gradient */
 html {
-	height: 100%;
-	background: white;
-	background: radial-gradient(circle, #fff 30%, #ffeeaa);
-	background-size: cover;
+height: 100%;
+min-width: 320px;
+overflow-x: hidden;
+overflow-y: scroll;
+background-color: white;
+color: #222222;
+font-family: Arial,Helvetica,Geneva,sans-serif;
+font-size: 14px;
+-webkit-text-size-adjust: 100%;
+display: block;
+}
+
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, 
+form, fieldset, legend, input, textarea, p, blockquote, th, td, article, 
+aside, canvas, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+margin: 0;
+padding: 0;
 }
 
 body {
-	margin-top: 50px;
-	margin-bottom: 200px;
+font-family: "Helvetica Neue",HelveticaNeue,Helvetica,TeXGyreHeros,FreeSans,"Nimbus Sans L","Liberation Sans",Arial,sans-serif;
+text-rendering: optimizeLegibility;
+-webkit-font-smoothing: antialiased;
+-moz-osx-font-smoothing: grayscale;
+text-align: center;
 }
 
-#header h1 {
-	height: auto;
-	text-align: center;
-	font-family: 'Damion', cursive;
-	font-size: 90px;
-	color: #FF9900;
-	text-shadow: 3px 3px 3px rgba(89, 89, 89, 0.6);
+div {
+display: block;
 }
 
-#top {
-	width: 325px;
-	height: auto;
-	
-	margin: 100px auto;
-	padding: 20px 20px 9px;
-	
-	background: #FFF700;
-	background: linear-gradient(#FFD700, #FF8900);
-	border-radius: 3px;
-	box-shadow: 0px 4px #FF5500, 0px 10px 15px rgba(0, 0, 0, 0.2);
+a {
+text-decoration: none;
+outline: none;
 }
 
-#top input {
-	width: 100%;
-	height: 60px;
-	font-family: 'Damion', cursive;
-	font-size: 36px;
-	color: #898989;
-	text-align: center;
+ul, menu, dir {
+display: block;
+list-style-type: disc;
+-webkit-margin-before: 1em;
+-webkit-margin-after: 1em;
+-webkit-margin-start: 0px;
+-webkit-margin-end: 0px;
+-webkit-padding-start: 40px;
 }
 
-#top p {
-	margin-top: 20px;
-	text-align: center;
+input {
+padding: 0 10px;
+border-radius: 3px;
+font-weight: bold;
+color: white;
+text-decoration: none;
+background-color: #0099e5;
+border: 1px solid #08c;
+min-width: 250px;
+height: 50px;
+text-align: center;
+line-height: 48px;
+font-color: white;
+font-size: 20px;
+text-shadow: 0px 1px 0px #08c;
+-webkit-box-shadow: 0px 1px 0px rgba(255,255,255,0.15) inset;
+box-shadow: 0px 1px 0px rgba(255,255,255,0.15) inset;
+-webkit-transition: background-color 0.1s ease-in-out;
+transition: background-color 0.1s ease-in-out;
 }
 
+*::-webkit-input-placeholder {
+    color: #CCCCCC;
+}
 
-/*this is where jQuery appends the instagram json response*/
-#instagram {
-	float: left;
-	padding: 20px;
+* {
+-webkit-box-sizing: border-box;
+-moz-box-sizing: border-box;
+box-sizing: border-box;
+}
+
+.header .inner {
+max-width: 1200px;
+padding: 0 10px;
+margin: 0 auto;
+height: 60px;
+}
+
+.header {
+position: fixed;
+z-index: 10;
+top: 0;
+width: 100%;
+background: rgba(0, 0, 0, 0.2);
+height: 60px;
+-webkit-transform: translate3d(0, 0, 0);
+-ms-transform: translate3d(0, 0, 0);
+transform: translate3d(0, 0, 0);
+-webkit-transition: all 0.2s;
+transition: all 0.2s;
+}
+
+.header .logo {
+background: url(https://gadgetreactor.github.io/holeeday/images/logo.png) center no-repeat;
+float: left;
+display: block;
+height: 60px;
+width: 60px;
+-webkit-background-size: 60px 60px;
+background-size: 60px 60px;
+}
+
+.header .right .login {
+height: 30px;
+padding: 0 15px;
+margin-right: 10px;
+line-height: 30px;
+border-radius: 3px;
+-webkit-transition: all 0.2s;
+transition: all 0.2s;
+}
+
+.header .right .signup {
+padding: 0 15px;
+-webkit-transition: all 0.2s;
+transition: all 0.2s;
+}
+
+.header .right a {
+float: right;
+font-weight: bold;
+color: white;
+margin-top: 15px;
+}
+
+.masthead {
+display: table;
+width: 100%;
+position: relative;
+background: #525558 url('images/background.jpg');
+-webkit-background-size: cover;
+background-size: cover;
+background-repeat: no-repeat;
+background-position: center 40%;
+text-align: center;
+min-height: 350px;
+height: 520px;
+height: -webkit-calc(100vh);
+height: calc(100vh);
+}
+
+.masthead h1 {
+padding-top: 20%;
+font-size: 48px;
+margin-bottom: 20px;
+}
+
+.masthead h1, .masthead h2 {
+color: white;
+margin: 0;
+padding-bottom: 20px;
+}
+
+.masthead .scroll_arrow {
+position: absolute;
+bottom: 10px;
+left: 0;
+right: 0;
+-webkit-transition: opacity 0.2s;
+transition: opacity 0.2s;
+width: 60px;
+margin: auto;
+padding: 20px 0 10px 0;
+}
+
+.button.on-image {
+border: none;
+-webkit-box-shadow: 0px 1px 0px rgba(255,255,255,0.15) inset,0px 1px 2px rgba(0,0,0,0.15);
+box-shadow: 0px 1px 0px rgba(255,255,255,0.15) inset,0px 1px 2px rgba(0,0,0,0.15);
+}
+
+.button.large {
+min-width: 250px;
+height: 50px;
+text-align: center;
+line-height: 48px;
+font-size: 20px;
+}
+
+.button {
+cursor: pointer;
+display: inline-block;
+padding: 0 10px;
+height: 30px;
+line-height: 28px;
+border-radius: 3px;
+font-weight: bold;
+color: white;
+text-decoration: none;
+background-color: #0099e5;
+border: 1px solid #08c;
+text-shadow: 0px 1px 0px #08c;
+-webkit-box-shadow: 0px 1px 0px rgba(255,255,255,0.15) inset;
+box-shadow: 0px 1px 0px rgba(255,255,255,0.15) inset;
+-webkit-transition: background-color 0.1s ease-in-out;
+transition: background-color 0.1s ease-in-out;
+}
+
+#photo_grid {
+    float: none;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.photos .tabs>li {
+display: inline;
+margin: 0 30px;
+}
+
+.photos .tabs>li>a {
+font-size: 16px;
+display: inline-block;
+padding: 15px 0;
+height: 50px;
+border-bottom: 2px solid transparent;
+color: #525558;
+white-space: nowrap;
+}
+
+.photos .photo_container {
+background: #f7f8fa;
+padding-bottom: 45px;
+}
+
+.photos .text_wrap {
+padding: 80px 10px;
+}
+
+.photos .text_wrap h2 {
+font-size: 36px;
+margin-bottom: 20px;
+}
+
+.photos .text_wrap h4 {
+font-size: 18px;
+}
+
+.photos .text_wrap h2, .photos .text_wrap h4 {
+color: #525558;
+font-weight: normal;
+line-height: 1.4em;
+margin: 0;
 }
 
 /*around each image*/
 .instagram-wrap {
-	float: left;
 	position: relative;
-	background: white;
+}
+
+.instagram-wrap img {
+	position: relative;
+	margin: 5px;
 	padding: 5px;
-	margin: 15px;
-	box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+	padding-bottom:5px;
+	margin-bottom: 5px;
+	width: 325px;
+	height: 325px;
+	border: 2px solid;
+	border-radius: 3px;
+	border-color: #bbb #999;	
 }
 
 .instagram-wrap .likes {
 	height: 16px;
 	position: absolute;
 	left: 10px;
-	top: 10px;
-	color: black;
+	top: -30px;
+	color: #darkgray;
 	padding: 0 5px 0 22px;
 	margin: 10px;
 	line-height: 16px;
-	background: gray url('fav.png') no-repeat 2px 0;
+	background: white url('images/fav.png') no-repeat 2px 0;
 	opacity: 0.7;
 }
 
-.clearfix {
-	 clear:both;
-}
-
 #showMore{
-	margin: 20px 15px 28px;
+	padding-top: 20px;
 	text-align: center;
+	display: none;
 }
 
-#more {
-  position: relative;
-  vertical-align: top;
-  width: 100%;
-  height: 60px;
-  padding: 10px 50px 10px 50px;
-  font-size: 22px;
-  color: white;	
-  font-family: 'Damion', cursive;
-  text-align: center;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
-  background: #f39c12;
-  border: 0;
-  border-bottom: 2px solid #e8930c;
-  cursor: pointer;
-  -webkit-box-shadow: inset 0 -2px #e8930c;
-  box-shadow: inset 0 -2px #e8930c;
+.footer{
+	padding: 20px 20px 20px 20px;
 }
 
 </style>
-</head>
 
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
     <script type="text/javascript">
-	function getInstagram(api_url){
+	function getUrlParameter(sParam){
+		var sPageURL = window.location.search.substring(1);
+		var sURLVariables = sPageURL.split('&');
+		for (var i = 0; i < sURLVariables.length; i++) 
+		{
+			var sParameterName = sURLVariables[i].split('=');
+			if (sParameterName[0] == sParam) 
+			{
+				return sParameterName[1];
+			}
+		}
+	}        	
+	
+	function getInstagram(apiUrl){
 		var count = 20;
-		var hashtag = "hackatronasia";
+		var hashtag = getUrlParameter('hashtag');
+
 		if ( $('#id_hashtag').val() != '' ){
 			hashtag = $('#id_hashtag').val();
 		}
-		if ( api_url == '' ){
-			$("#instagram").html("");
-			api_url = "https://api.instagram.com/v1/tags/"+hashtag+"/media/recent/?client_id=e25c0165ca764a4ea0d0f9648b996c93";
+		
+		if (hashtag == undefined) {
+		return;
+		}
+		
+		if ( apiUrl == undefined ){
+			$("#photo_grid").html("");
+			apiUrl = "https://api.instagram.com/v1/tags/"+hashtag+"/media/recent/?client_id=e25c0165ca764a4ea0d0f9648b996c93";
+			$('html, body').animate({
+				scrollTop: $("#photo_grid").offset().top
+			}, 1500);
 		}
 		
 		$.ajax({
             type: "GET",
             dataType: "jsonp",			
-            url: api_url,
+            url: apiUrl,
             success: function(data) {
-				next_url = data.pagination.next_url;	
+				nextUrl = data.pagination.next_url;	
 	            for (var i = 0; i < count; i++) {
 						if (typeof data.data[i] !== 'undefined' ) {
-							$("#instagram").append("<div class='instagram-wrap' id='pic-"+ data.data[i].id +"' ><a target='_blank' href='" + data.data[i].link +"'><span class='likes'>"+data.data[i].likes.count +" likes</span><img class='instagram-image' src='" + data.data[i].images.low_resolution.url +"' /></a></div>"
-							);  
+							$("#photo_grid").append("<span class='instagram-wrap' id='pic-"+ data.data[i].id +"' ><a target='_blank' href='" + data.data[i].link +"'><img class='instagram-image' src='" + data.data[i].images.low_resolution.url +"' /></a><span class='likes'>"+data.data[i].likes.count +" likes</span></span>"
+							); 
 						}  
-	      		}			
-			$("#showMore").hide();
-			if (typeof next_url === 'undefined' || next_url.length < 10 ) {
+	      		}
+			$("#loading").hide();
+			if (typeof nextUrl === 'undefined' || nextUrl.length < 10 ) {
 				$("#showMore").hide();
 				$("#more").attr( "next_url", "");
 			}
 			else {
 				$("#showMore").show();
-				$( "#more" ).attr( "next_url", next_url);
-				last_url = next_url;				
-			}			
+				$( "#more" ).attr( "next_url", nextUrl);
+			}	
             }
         });
 	}
 
 	$(document).ready(function() {
+		//manual click to load more
 		$("#more").click(function() {  
-			var next_url = $(this).attr('next_url');
-			getInstagram(next_url);
+			var nextUrl = $("#more").attr('next_url');
+			getInstagram(nextUrl);
 			return false;
 		});
-
-		getInstagram("");
+		$("#loading").hide();		
+		getInstagram();
 	});
+$(window).scroll(function() {
+	if($(window).scrollTop() == $(document).height() - $(window).height()) {
+		if (nextUrl != undefined){
+			$("#loading").show();
+			$("#hide").show();
+			getInstagram(nextUrl);
+		}
+		return false;
+	}
+});	
 
 
 </script>
-	
-	
-    </script>	
 
 </head>
+
 <body>
-<div id = "header">
-	<h1>Instatag</h1>
+<nav class='header fadein transparent'>
+<div class='background'></div>
+<div class='wrapper'>
+<div class='inner'>
+<a class='logo' href='https://seanseah.github.com'></a>
+<div class='right'>
+<a class='signup button submit' data-ga-action='Sign Up' data-ga-category='Homepage Navigation Header' >
+Sign up
+</a>
+<a class='login' data-ga-action='Log in' data-ga-category='Homepage Navigation Header' >
+Log in
+</a>
 </div>
-<div id = "top">
-	<input id="id_hashtag" value="hackatronasia" onChange="getInstagram('')"/>
-	<p>What's Popular: #9GAG, #OOTD</p>
 </div>
-
-<div id = "instagram">
 </div>
+</nav>
 
-<div id="showMore">
-	<div class='clearfix'><a id='more' next_url=''>Load More</a></div>		
+<section class='masthead'>
+<div id='text_wrap'>
+<h1>Home to Instagram's Latest</h1>
+<h2>#instatag helps you discover amazing photos, see the latest trends, and stay inspired.</h2>
+	<div>
+	<input id="id_hashtag" placeholder ="enter hashtag here" value="" onChange="getInstagram()"/>
+	</div>
 </div>
+<a class='scroll_arrow' href='#photos'>
+<img src='https://assetcdn.500px.org/assets/home/arrrow_down2@2x-c1ef6b59115c590e1977cc28eac1d35c.png'>
+</a>
+</section>
 
-	
+<section id="photos" class='photos'>
+<div class='text_wrap'>
+<h2>Explore latest moments on Instagram</h2>
+<h4>Click on the below popular hashtags for more interesting moments.</h4>
+</div>
+<div class='tab_wrapper'>
+<ul class='tabs'>
+<li>
+<a href='?hashtag=everyday'>Everyday moments</a>
+</li>
+<li>
+<a href='?hashtag=winter'>Winter is coming</a>
+</li>
+<li>
+<a href='?hashtag=sg50'>Singapore 50</a>
+</li>
+<li>
+<a href='?hashtag=ootd'>Outfit of the Day</a>
+</li>
+</ul>
+</div>
+<div class='photo_container'>
+<div id='photo_grid'></div>
+<div id="showMore"><a id='more' class="button large" next_url=''>Load More</a></div>
+<div id="loading">... loading ...</div>
 
+</div>
+</section>
+<footer>
+<div class ="footer"><br>Copyright Sean Seah<br>
+</div>
+</footer>
 </body>
 </html>
