@@ -85,7 +85,7 @@ $(document).ready(function() {
 		$("#loading").show();
 		getInstagram({
 				apiUrl: nextUrl,
-				client_id: clientId,
+				clientId: clientId,
 			});
 		return false;
 	});
