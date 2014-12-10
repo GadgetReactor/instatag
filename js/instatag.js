@@ -3,17 +3,10 @@ var clientId;
 
 // get via hashtag (apiUrl: 'hashtag' + tagName), user (apiUrl: 'user' + userId) or popular (option - default)
 
-function scrollToPhoto() {
-	$('html, body').animate({
-		scrollTop: $("#photo_grid").offset().top
-	}, 1500);
-}
-
 function getInstagram(params, context) {
       var option, value;
       this.options = {
         apiUrl: 'popular',
-		animate: true,
       };
       if (typeof params === 'object') {
         for (option in params) {
@@ -38,21 +31,12 @@ function getInstagram(params, context) {
 			return;
 		}				
 		apiUrl = "https://api.instagram.com/v1/tags/"+hashtag+"/media/recent/";
-		if (this.options.animate) {
-			scrollToPhoto()
-		}
 	} else if ( apiUrl == 'user' ){
 		$("#photo_grid").html("");
 		apiUrl = "https://api.instagram.com/v1/users/"+this.options.userId+"/media/recent/";
-		if (this.options.animate) {
-			scrollToPhoto()
-		}		
 	} else if ( apiUrl == 'popular' ){
 		$("#photo_grid").html("");
 		apiUrl = "https://api.instagram.com/v1/media/popular/";
-		if (this.options.animate) {
-			scrollToPhoto()
-		}		
 	}
 		
 	$.ajax({

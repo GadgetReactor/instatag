@@ -14,8 +14,8 @@
 	<div class='inner'>
 		<a class='logo' href='https://seanseah.github.com'></a>
 		<div class='right'>
-			<a class='signup button submit' data-ga-action='Sign Up' data-ga-category='Homepage Navigation Header' >Sign up</a>
-			<a class='login' data-ga-action='Log in' data-ga-category='Homepage Navigation Header' >Log in</a>
+			<a class='signup button submit' href = 'http://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fwww.facebook.com%2Fgadgetreactor&width&layout=standard&action=like&show_faces=true&share=true&height=80&appId=505013896254925' target="_blank">Like Us</a>
+			<a class='login' href='http://www.gadgetreactor.com' >See More</a>
 		</div>
 	</div>
 </div>
@@ -26,14 +26,14 @@
 <h1>Home to Instagram's Latest</h1>
 <h2>#instatag helps you discover amazing photos, see the latest trends, and stay inspired.</h2>
 	<div>
-	<input id="id_hashtag" placeholder ="enter hashtag here" value="" onChange="getInstagram({
+	<input id="id_hashtag" placeholder ="enter hashtag here" value="" onChange="scrollToPhoto();getInstagram({
         apiUrl: 'hashtag',
 		tagName: this.value,
 		clientId: 'e25c0165ca764a4ea0d0f9648b996c93',
-    })"/>	
+    });"/>	
 	</div>
 </div>
-<a class='scroll_arrow' href='#photos'><img src='images/arrow-down.png'/></a>
+<a id ='scroll_arrow' class='scroll_arrow' href='#photos'><img src='images/arrow-down.png'/></a>
 </section>
 
 <section id="photos" class='photos'>
@@ -43,10 +43,10 @@
 </div>
 <div class='tab_wrapper'>
 	<ul class='tabs'>
-	<li><a href='?hashtag=everyday#photos'>Everyday moments</a></li>
-	<li><a href='?hashtag=winter'>Winter is coming</a></li>
-	<li><a href='?hashtag=sg50'>Singapore 50</a></li>
-	<li><a href='?hashtag=ootd'>Outfit of the Day</a></li>
+	<li class = "listtag" value="everyday">Everyday moments</li>
+	<li class = "listtag" value='winter'>Winter is coming</li>
+	<li class = "listtag" value='sg50'>Singapore 50</li>
+	<li class = "listtag" value='ootd'>Outfit of the Day</li>
 	</ul>
 </div>
 <div class='photo_container'>
@@ -68,7 +68,7 @@
 	   <li>Design by GadgetReactor</a></li>          
 	</ul>
   </div>
-  <div id="go-top"><a title="Back to Top" href="#top">/\</a></div>
+  <div id="go-top"><a title="Back to Top" href="#top">&and;</a></div>
 </footer> <!-- Footer End--> 
 </body>
 
@@ -96,11 +96,23 @@
 				apiUrl: 'hashtag',
 				tagName: hashtag,
 				clientId: 'e25c0165ca764a4ea0d0f9648b996c93',				
-			});	
+			});
+			scrollToPhoto();
 		}
 	});
 	
 $(window).scroll(function() {
+/*----------------------------------------------------*/
+/*	Back To Top Button
+/*----------------------------------------------------*/
+	if ($(window).scrollTop() >= 300) {
+		$("#go-top").fadeIn(400);
+	} else {
+		$("#go-top").fadeOut(400);
+	}
+/*----------------------------------------------------*/
+/*	Infinite Load
+/*----------------------------------------------------*/
 	if($(window).scrollTop() == $(document).height() - $(window).height()) {
 		if (nextUrl != 'undefined'){
 			$("#loading").show();
@@ -111,21 +123,26 @@ $(window).scroll(function() {
 				})
 		}
 		return false;
-	}
+	}	
 });	
 
-/*----------------------------------------------------*/
-/*	Back To Top Button
-/*----------------------------------------------------*/
-jQuery(window).scroll(function() {
+function scrollToPhoto() {
+	$('html, body').animate({
+		scrollTop: $("#photo_grid").offset().top
+	}, 1500);
+	return false;
+}
 
-	if (jQuery(window).scrollTop() >= 400) {
-		jQuery("#go-top").fadeIn(400);
-	} else {
-		jQuery("#go-top").fadeOut(400);
-	}
+$('#scroll_arrow').click(function(){
+	scrollToPhoto();
+});
+
+$('.listtag').click(function(){
+	getInstagram({
+        apiUrl: 'hashtag',
+		tagName: $(this).attr('value'),
+		clientId: 'e25c0165ca764a4ea0d0f9648b996c93',
+    });
 });
 </script>
-
-
 </html>
