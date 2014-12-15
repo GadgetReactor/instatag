@@ -1,19 +1,20 @@
-var nextUrl = 'undefined';
+var nextUrl;
 var clientId;
+var ready = true;
 
 // get via hashtag (apiUrl: 'hashtag' + tagName), user (apiUrl: 'user' + userId) or popular (option - default)
 
 function getInstagram(params, context) {
-      var option, value;
-      this.options = {
+    var option, value;
+    this.options = {
         apiUrl: 'popular',
-      };
-      if (typeof params === 'object') {
+    };
+    if (typeof params === 'object') {
         for (option in params) {
           value = params[option];
           this.options[option] = value;
         }
-      }
+    }
 	 
 	var count = 20;
 	var hashtag = this.options.tagName;
@@ -25,10 +26,12 @@ function getInstagram(params, context) {
 	
 	clientId = this.options.clientId;
 	
+	ready = false;
+	
 	if ( apiUrl == 'hashtag' ){
 		$("#photo_grid").html("");
 		if (hashtag == undefined) {
-			return;
+			return false;
 		}				
 		apiUrl = "https://api.instagram.com/v1/tags/"+hashtag+"/media/recent/";
 	} else if ( apiUrl == 'user' ){
@@ -54,7 +57,8 @@ function getInstagram(params, context) {
 					}  
 			}
 			$("#loading").hide();
-			if (typeof nextUrl === 'undefined') {
+			ready = true;
+			if (typeof nextUrl == undefined) {
 				$("#showMore").hide();
 			} else {
 				$("#showMore").show();

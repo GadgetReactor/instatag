@@ -113,8 +113,10 @@ $(window).scroll(function() {
 /*----------------------------------------------------*/
 /*	Infinite Load
 /*----------------------------------------------------*/
-	if($(window).scrollTop() == $(document).height() - $(window).height()) {
+
+	if(ready && $(window).scrollTop() == $(document).height() - $(window).height()) {
 		if (nextUrl != 'undefined'){
+			ready = false;
 			$("#loading").show();
 			$("#hide").show();
 			getInstagram({
