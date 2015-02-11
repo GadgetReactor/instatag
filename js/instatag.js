@@ -1,3 +1,7 @@
+// Copyright 2014
+// Attributable to Sean Seah @ www.gadgetreactor.com
+// Free for use but please retain this message
+
 var nextUrl;
 var clientId;
 var ready = true;
@@ -52,7 +56,7 @@ function getInstagram(params, context) {
 			nextUrl = data.pagination.next_url;	
 			for (var i = 0; i < count; i++) {
 					if (typeof data.data[i] !== 'undefined' ) {
-						$("#photo_grid").append("<span class='instagram-wrap' id='pic-"+ data.data[i].id +"' ><a target='_blank' href='" + data.data[i].link +"'><img class='instagram-image' src='" + data.data[i].images.low_resolution.url +"' /></a><span class='likes'>"+data.data[i].likes.count +" likes</span></span>"
+						$("#photo_grid").append("<span class='instagram-wrap' id='pic-"+ data.data[i].id +"' ><a target='_blank' href='" + data.data[i].link +"'><img class='instagram-image' id = 'instatag-image' src='" + data.data[i].images.low_resolution.url +"' /></a><span class='likes'>"+data.data[i].likes.count +" likes</span></span>"
 						); 
 					}  
 			}
