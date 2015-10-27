@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Instatag</title>
+	<link rel="stylesheet" href="css/layout.css">
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+</head>
+
+<body>
+<nav class='header fadein transparent'>
+<div class='background'></div>
+<div class='wrapper'>
+	<div class='inner'>
+		<a class='logo' href='https://seanseah.github.com'></a>
+		<div class='right'>
+			<a class='signup button submit' href = 'http://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fwww.facebook.com%2Fgadgetreactor&width&layout=standard&action=like&show_faces=true&share=true&height=80&appId=505013896254925' target="_blank">Like Us</a>
+			<a class='login' href='http://www.gadgetreactor.com' >See More</a>
+		</div>
+	</div>
+</div>
+</nav>
+
+<section id = "top" class='masthead'>
+<div id='text_wrap'>
+<h1>Home to Instagram's Latest</h1>
+  <button id="slideShowButton"></button> <!-- Optional button element. -->
+<h2>#instatag helps you discover amazing photos, see the latest trends, and stay inspired.</h2>
+
+	<div>
+	<input id="id_hashtag" placeholder ="enter hashtag here" value="" onChange="scrollToPhoto();getInstagram({
+        apiUrl: 'hashtag',
+		tagName: this.value,
+		clientId: 'e25c0165ca764a4ea0d0f9648b996c93',
+    });"/>	
+	</div>
+</div>
+<a id ='scroll_arrow' class='scroll_arrow' href='#photos'><img src='images/arrow-down.png'/></a>
+</section>
+
+<section id="photos" class='photos'>
+<div class='text_wrap'>
+	<h2>Explore latest moments on Instagram</h2>
+	<h4>Click on the below popular hashtags for more interesting moments.</h4>
+</div>
+<div class='tab_wrapper'>
+	<ul class='tabs'>
+	<li class = "listtag" value="everyday">Everyday moments</li>
+	<li class = "listtag" value='winter'>Winter is coming</li>
+	<li class = "listtag" value='sg50'>Singapore 50</li>
+	<li class = "listtag" value='ootd'>Outfit of the Day</li>
+	</ul>
+</div>
+<div class='photo_container'>
+	<div id='photo_grid'></div>
+</div>
+</section>
+
+<div id="showMore">
+	<div id="loading"><img src="images/preloader.gif"></div>
+	<a id='more' class="button large" next_url=''>Load More</a>
+</div>
+
+<!-- footer
+================================================== -->
+<footer>
+  <div>
+	<ul class="copyright">
+	   <li>&copy; Copyright 2014 Sean Seah</li>
+	   <li>Design by GadgetReactor</a></li>          
+	</ul>
+  </div>
+  <div id="go-top"><a title="Back to Top" href="#top">&and;</a></div>
+</footer> <!-- Footer End--> 
+</body>
+
+<script src="js/instatag.js"></script>
+<script src="js/slideshow.js"></script>
+
+<script type="text/javascript">
+	function getUrlParameter(sParam){
+		var sPageURL = window.location.search.substring(1);
+		var sURLVariables = sPageURL.split('&');
+		for (var i = 0; i < sURLVariables.length; i++) 
+		{
+			var sParameterName = sURLVariables[i].split('=');
+			if (sParameterName[0] == sParam) {
+				return sParameterName[1];
+			}
+		}
+	}        	
+
+	$(document).ready(function() {
+		var hashtag = getUrlParameter('hashtag');
+		$("#photo_grid").hide();		
+		if (hashtag == undefined) {
+			return;
+		}	else {
+			getInstagram({
+				apiUrl: 'hashtag',
+				tagName: hashtag,
+				clientId: 'e25c0165ca764a4ea0d0f9648b996c93',				
+			});
+			scrollToPhoto();
+		}
+	});
+	
+$(window).scroll(function() {
+/*----------------------------------------------------*/
+/*	Back To Top Button
+/*----------------------------------------------------*/
+	if ($(window).scrollTop() >= 300) {
+		$("#go-top").fadeIn(400);
+	} else {
+		$("#go-top").fadeOut(400);
+	}
+/*----------------------------------------------------*/
+/*	Infinite Load
+/*----------------------------------------------------*/
+
+	if(ready && $(window).scrollTop() == $(document).height() - $(window).height()) {
+		if (nextUrl != 'undefined'){
+			ready = false;
+			$("#loading").show();
+			$("#hide").show();
+			getInstagram({
+					apiUrl: nextUrl,
+					clientId: clientId,
+				})
+		}
+		return false;
+	}	
+});	
+
+function scrollToPhoto() {
+	$('html, body').animate({
+		scrollTop: $("#photo_grid").offset().top
+	}, 1500);
+	return false;
+}
+
+$('#scroll_arrow').click(function(){
+	scrollToPhoto();
+});
+
+$('.listtag').click(function(){
+	getInstagram({
+        apiUrl: 'hashtag',
+		tagName: $(this).attr('value'),
+		clientId: 'e25c0165ca764a4ea0d0f9648b996c93',
+    });
+});
+</script>
+</html>
